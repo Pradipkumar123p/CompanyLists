@@ -21,12 +21,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class ListOfCompanyForAUS {
+public class ListOfCompanyForCanada {
 	
-	  public static void main(String[] args) throws IOException, InterruptedException {
+	 public static void main(String[] args) throws IOException, InterruptedException {
 
 	        String filepath = "C:\\Users\\nizam\\eclipse-workspace\\OfficeWork\\Excel_File\\";
-	        String filename = "ListCompany_AUS.xlsx";
+	        String filename = "ListCompany_Canada.xlsx";
 
 	        System.setProperty("webdriver.chrome.driver", "C:\\Users\\nizam\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 
@@ -41,7 +41,7 @@ public class ListOfCompanyForAUS {
 	        driver.findElement(By.xpath("//textarea[@class='gLFyf']")).sendKeys(Keys.ENTER);
 	        driver.findElement(By.xpath("(//h3[@class='LC20lb MBeuO DKV0Md'])[1]")).click();
 
-	        FileInputStream file = new FileInputStream("C:\\Users\\nizam\\Downloads\\CompanyListAUS.xlsx");
+	        FileInputStream file = new FileInputStream("C:\\Users\\nizam\\Downloads\\CompanyListCanada.xlsx");
 	        XSSFWorkbook book = new XSSFWorkbook(file);
 	        XSSFSheet sheet = book.getSheetAt(0);
 	        int rowCount = sheet.getLastRowNum();
@@ -67,7 +67,7 @@ public class ListOfCompanyForAUS {
 	            driver.findElement(By.xpath("//input[@type='text']")).sendKeys(cellValue);
 	            driver.findElement(By.xpath("//input[@type='submit']")).click();
 
-	            Thread.sleep(1000);
+	            Thread.sleep(2500);
 	            List<WebElement> textMatche = driver.findElements(By.xpath("//p"));
 	            List<WebElement> textMatches1 = driver.findElements(By.xpath("//a[@class='text-dark']"));
 	            List<WebElement> textMatches2 = driver.findElements(By.xpath("//h6[@class='card-title text-secondary']"));
@@ -110,9 +110,9 @@ public class ListOfCompanyForAUS {
 	                    matchText = "Wix";
 	                    break;
 	                } else if (text.contains("prestashop")) {
-                        matchText = "PrestaShop";
-                        break;
-                    } 
+	                    matchText = "PrestaShop";
+	                    break;
+	                } 
 	            }
 
 	            System.out.println(matchText);
@@ -156,5 +156,9 @@ public class ListOfCompanyForAUS {
 	        File f = new File(filepath);
 	        return f.exists();
 	    }
+	  
+	
+	
+	
 
 }

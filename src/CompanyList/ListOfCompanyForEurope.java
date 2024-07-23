@@ -30,7 +30,7 @@ public class ListOfCompanyForEurope {
 
     public static void main(String[] args) throws IOException, InterruptedException {
     	
-        String filepath = "C:\\Users\\nizam\\eclipse-workspace\\Java\\Excel_File\\";
+        String filepath = "C:\\Users\\nizam\\eclipse-workspace\\OfficeWork\\Excel_File\\";
         String filename = "CompanyList_Europe.xlsx";
 
         System.setProperty("webdriver.chrome.driver", "C:\\Users\\nizam\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
@@ -83,10 +83,12 @@ public class ListOfCompanyForEurope {
             Thread.sleep(1000);
             List<WebElement> textMatche = driver.findElements(By.xpath("//p"));
             List<WebElement> textMatches1 = driver.findElements(By.xpath("//a[@class='text-dark']"));
+            List<WebElement> textMatches2 = driver.findElements(By.xpath("//h6[@class='card-title text-secondary']"));
 
             ArrayList<WebElement> textMatches = new ArrayList<>();
             textMatches.addAll(textMatche);
             textMatches.addAll(textMatches1);
+            textMatches.addAll(textMatches2);
 
             String platform = "Not add platform";
             String matchText = "Not Match";
@@ -118,7 +120,10 @@ public class ListOfCompanyForEurope {
                 } else if (text.contains("wix")) {
                     matchText = "Wix";
                     break;
-                }
+                } else if (text.contains("prestashop")) {
+                    matchText = "PrestaShop";
+                    break;
+                } 
             }
 
             System.out.println(matchText);

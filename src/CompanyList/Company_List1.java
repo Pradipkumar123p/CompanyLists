@@ -28,8 +28,8 @@ public class Company_List1 {
 	
 	public static void main(String[] args) throws IOException, InterruptedException {
 		
-		 String excelFilePath = "C:\\Users\\nizam\\Downloads\\CompanyListEurope.xlsx";
-	        String csvFilePath = "C:\\Users\\nizam\\eclipse-workspace\\Java\\Excel_File\\ListCompany_Europe.csv"; // Adjust path as per your environment
+		    String excelFilePath = "C:\\Users\\nizam\\Downloads\\CompanyListEurope.xlsx";
+	        String csvFilePath = "CompanyList1.csv"; // Adjust path as per your environment
 
 	        System.setProperty("webdriver.chrome.driver", "C:\\Users\\nizam\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 
@@ -43,7 +43,7 @@ public class Company_List1 {
 	        try {
 	            driver.get("https://www.google.com/");
 
-	            // Example search
+	             // Add Web-element for Perform 
 	            String searchKeyword = "build with";
 	            driver.findElement(By.xpath("//textarea[@class='gLFyf']")).sendKeys(searchKeyword);
 	            driver.findElement(By.xpath("//textarea[@class='gLFyf']")).sendKeys(Keys.ENTER);
@@ -59,7 +59,7 @@ public class Company_List1 {
 	            System.out.println(rowCount);
 
 	            List<String[]> resultList = new ArrayList<>();
-	            resultList.add(new String[]{"Company URL", "Company_Status", "Platform_Status"}); // Header for CSV
+	            resultList.add(new String[]{"Company_URL", "Company_Status", "Platform_Status"}); // Header for CSV
 
 	            for (int i = 1; i <= 5; i++) {
 	                Row row = sheet.getRow(i);
@@ -67,13 +67,16 @@ public class Company_List1 {
 	                String cellvalue = cell.getStringCellValue();
 	                System.out.println(cellvalue);
 
+	                String platform = "Not add platform";
+	                String matchText = "Not attached with any eCommerce company";
+	                
 	                // Your logic to fetch company status and platform status
-	                String companyURL = cellvalue;
-	                String companyStatus = ""; // Replace with your logic
-	                String platformStatus = "Unknown"; // Replace with your logic
+	                String CompanyURL = cellvalue;
+	                String CompanyStatus = matchText; // Replace with your logic
+	                String PlatformStatus = platform; 
 	                
 	                
-	                driver.findElement(By.xpath("//input[@type='text']")).sendKeys(companyURL);
+	                driver.findElement(By.xpath("//input[@type='text']")).sendKeys(CompanyURL);
 	                driver.findElement(By.xpath("//input[@type='submit']")).click();
 	                
 
@@ -85,8 +88,7 @@ public class Company_List1 {
 	                textMatches.addAll(textMatche);
 	                textMatches.addAll(textMatches1);
 
-	                String platform = "Not add platform";
-	                String matchText = "Not Match";
+	              
 	                for (WebElement matchElement : textMatches) {
 	                    String text = matchElement.getText().toLowerCase();
 	                     if (text.contains("ecommerce")) {
@@ -117,7 +119,11 @@ public class Company_List1 {
 	                    } else if (text.contains("wix")) {
 	                        matchText = "Wix";
 	                        break;
+	                    } else if (text.contains("prestashop")) {
+	                        matchText = "PrestaShop";
+	                        break;
 	                    } 
+	                    
 	                }
 
 	                System.out.println(matchText);
@@ -128,7 +134,7 @@ public class Company_List1 {
 	                driver.findElement(By.xpath("//input[@type='text']")).clear();
 
 	                // Example of collecting data to write to CSV
-	                resultList.add(new String[]{companyURL, companyStatus, platformStatus});
+	                resultList.add(new String[]{CompanyURL, CompanyStatus, PlatformStatus});
 	                
 	                
 	            }

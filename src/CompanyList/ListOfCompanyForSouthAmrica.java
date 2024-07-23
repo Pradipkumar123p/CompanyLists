@@ -10,7 +10,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -21,12 +24,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class ListOfCompanyForAUS {
+public class ListOfCompanyForSouthAmrica {
 	
-	  public static void main(String[] args) throws IOException, InterruptedException {
 
+	  public static void main(String[] args) throws IOException, InterruptedException {
+	    	
 	        String filepath = "C:\\Users\\nizam\\eclipse-workspace\\OfficeWork\\Excel_File\\";
-	        String filename = "ListCompany_AUS.xlsx";
+	        String filename = "CompanyList_SouthAmrica.xlsx";
 
 	        System.setProperty("webdriver.chrome.driver", "C:\\Users\\nizam\\Downloads\\chromedriver-win64\\chromedriver-win64\\chromedriver.exe");
 
@@ -41,7 +45,7 @@ public class ListOfCompanyForAUS {
 	        driver.findElement(By.xpath("//textarea[@class='gLFyf']")).sendKeys(Keys.ENTER);
 	        driver.findElement(By.xpath("(//h3[@class='LC20lb MBeuO DKV0Md'])[1]")).click();
 
-	        FileInputStream file = new FileInputStream("C:\\Users\\nizam\\Downloads\\CompanyListAUS.xlsx");
+	        FileInputStream file = new FileInputStream("C:\\Users\\nizam\\Downloads\\CompanyListSouthAmrica.xlsx");
 	        XSSFWorkbook book = new XSSFWorkbook(file);
 	        XSSFSheet sheet = book.getSheetAt(0);
 	        int rowCount = sheet.getLastRowNum();
@@ -51,11 +55,19 @@ public class ListOfCompanyForAUS {
 	        XSSFWorkbook book1 = new XSSFWorkbook();
 	        XSSFSheet sheet1 = book1.createSheet("Sheet1.1");
 
+	        // Create header style
+	        XSSFCellStyle headerStyle = book1.createCellStyle();
+	        headerStyle.setFillForegroundColor(IndexedColors.YELLOW.getIndex());
+	        headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+
 	        // Create header row
 	        XSSFRow headerRow = sheet1.createRow(0);
-	        headerRow.createCell(0).setCellValue("Company_URL");
-	        headerRow.createCell(1).setCellValue("Company_Status");
-	        headerRow.createCell(2).setCellValue("Platform_Status");
+	        String[] headers = {"Company_URL", "Company_Status", "Platform_Status"};
+	        for (int i = 0; i < headers.length; i++) {
+	            Cell cell = headerRow.createCell(i);
+	            cell.setCellValue(headers[i]);
+	            cell.setCellStyle(headerStyle); // Apply style to header cells
+	        }
 
 	        for (int i = 2; i <= rowCount; i++) {
 	            Row r = sheet.getRow(i);
@@ -67,12 +79,12 @@ public class ListOfCompanyForAUS {
 	            driver.findElement(By.xpath("//input[@type='text']")).sendKeys(cellValue);
 	            driver.findElement(By.xpath("//input[@type='submit']")).click();
 
-	            Thread.sleep(1000);
+	            Thread.sleep(2500);
 	            List<WebElement> textMatche = driver.findElements(By.xpath("//p"));
 	            List<WebElement> textMatches1 = driver.findElements(By.xpath("//a[@class='text-dark']"));
 	            List<WebElement> textMatches2 = driver.findElements(By.xpath("//h6[@class='card-title text-secondary']"));
-	            
-	            ArrayList<WebElement> textMatches = new ArrayList<WebElement>();
+
+	            ArrayList<WebElement> textMatches = new ArrayList<>();
 	            textMatches.addAll(textMatche);
 	            textMatches.addAll(textMatches1);
 	            textMatches.addAll(textMatches2);
@@ -81,14 +93,12 @@ public class ListOfCompanyForAUS {
 	            String matchText = "Not Match";
 	            for (WebElement matchElement : textMatches) {
 	                String text = matchElement.getText().toLowerCase();
-	                 if (text.contains("ecommerce")) {
+	                if (text.contains("ecommerce")) {
 	                    platform = "E-commerce";
-	                }
-	                 else if (text.contains("shopify")) {
+	                } else if (text.contains("shopify")) {
 	                    matchText = "Shopify";
 	                    break;
-	                }
-	                else if (text.contains("weebly")) {
+	                } else if (text.contains("weebly")) {
 	                    matchText = "Weebly";
 	                    break;
 	                } else if (text.contains("woocommerce")) {
@@ -110,9 +120,9 @@ public class ListOfCompanyForAUS {
 	                    matchText = "Wix";
 	                    break;
 	                } else if (text.contains("prestashop")) {
-                        matchText = "PrestaShop";
-                        break;
-                    } 
+                      matchText = "PrestaShop";
+                      break;
+                  } 
 	            }
 
 	            System.out.println(matchText);
@@ -133,8 +143,7 @@ public class ListOfCompanyForAUS {
 	        }
 
 	        // Auto size columns for the new sheet
-	        for (int i = 0; i < 3; i++) { // Adjust to fit all columns
-	        	
+	        for (int i = 0; i < headers.length; i++) { // Adjust to fit all columns
 	            sheet1.autoSizeColumn(i);
 	        }
 
@@ -156,5 +165,8 @@ public class ListOfCompanyForAUS {
 	        File f = new File(filepath);
 	        return f.exists();
 	    }
+	
+	
+	
 
 }
