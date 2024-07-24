@@ -10,6 +10,7 @@ import java.util.List;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.CellStyle;
 import org.apache.poi.ss.usermodel.FillPatternType;
+import org.apache.poi.ss.usermodel.Font;
 import org.apache.poi.ss.usermodel.IndexedColors;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -53,6 +54,14 @@ public class ExtractData_Termscondition {
         CellStyle headerStyle = workbook.createCellStyle();
         headerStyle.setFillForegroundColor(IndexedColors.LIGHT_BLUE.getIndex());
         headerStyle.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+        
+        Font headerFont = workbook.createFont();
+        headerFont.setBold(true);
+        headerStyle.setFont(headerFont);
+
+        // Content style with wrap text
+        CellStyle contentStyle = workbook.createCellStyle();
+        contentStyle.setWrapText(true);
        
         
         headerCell1.setCellStyle(headerStyle);
@@ -67,406 +76,422 @@ public class ExtractData_Termscondition {
             String content = "";
 
             switch (url) {
+            
             case "https://www.enyamond.com/policies/privacy-policy":
             	
-            content = driver.findElement(By.xpath("//div[@class='main-container container']")).getText();
-            System.out.println(content);
-            break;
-
-            case "https://www.enyamond.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
                 System.out.println(content);
                 break;
 
-            case "https://www.biogaia.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='entry-content']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.enyamond.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://alevanaturals.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.biogaia.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='entry-content']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.biogaia.com/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='entry-content']")).getText();
-                System.out.println(content);
-                break;
+                case "https://alevanaturals.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://bujjify.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.biogaia.com/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='entry-content']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://bujjify.com/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://bujjify.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://bujjify.com/policies/shipping-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://bujjify.com/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://cheekybambino.ca/pages/return-and-exchange-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='page-description rich-editor-text-content']")).getText();
-                System.out.println(content);
-                break;
+                case "https://bujjify.com/policies/shipping-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.cefi.ca/privacy-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@id='_rich_text-5-3']")).getText();
-                System.out.println(content);
-                break;
+                case "https://cheekybambino.ca/pages/return-and-exchange-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='page-description rich-editor-text-content']")).getText();
+                    System.out.println(content);
+                    break;
 
-     /*       case "https://www.costco.ca/customerservice.costco.ca/app/answers/answer_view/a_id/585":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;                             */
+                case "https://www.cefi.ca/privacy-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@id='_rich_text-5-3']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.costco.ca/purchase-terms.html":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='espot']")).getText();
-                System.out.println(content);
-                break;
+         /*       case "https://www.costco.ca/customerservice.costco.ca/app/answers/answer_view/a_id/585":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;                             */
 
-            case "https://www.costco.ca/terms-and-conditions-of-use.html":
-            	
-            	content = driver.findElement(By.xpath("//p[@class='tcCase']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.costco.ca/purchase-terms.html":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='espot']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.costco.ca/privacy-policy.html":                         //148
-            	
-            	content = driver.findElement(By.xpath("//div[@class='innerBlock']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.costco.ca/terms-and-conditions-of-use.html":
+                	
+                	content = driver.findElement(By.xpath("//p[@class='tcCase']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://alevanaturals.com/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.costco.ca/privacy-policy.html":                         //148
+                	
+                	content = driver.findElement(By.xpath("//div[@class='innerBlock']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://alevanaturals.com/policies/refund-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://alevanaturals.com/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://alevanaturals.com/policies/shipping-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://alevanaturals.com/policies/refund-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.drbrownsbaby.com/cookie-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='column ten offset-three']")).getText();  //174
-                System.out.println(content);
-                break;
+                case "https://alevanaturals.com/policies/shipping-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.drbrownsbaby.com/terms-of-use/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='column ten offset-three']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.drbrownsbaby.com/cookie-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='column ten offset-three']")).getText();  //174
+                    System.out.println(content);
+                    break;
 
-            case "https://hydralyte.com/pages/shipping-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte rtnu-page__content']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.drbrownsbaby.com/terms-of-use/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='column ten offset-three']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://hydralyte.com/pages/refund-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte rtnu-page__content']")).getText();
-                System.out.println(content);
-                break;
+                case "https://hydralyte.com/pages/shipping-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte rtnu-page__content']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://hydralyte.com/pages/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='elm text-edit']")).getText();
-                System.out.println(content);
-                break;
+                case "https://hydralyte.com/pages/refund-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte rtnu-page__content']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://hydralyte.com/pages/terms-conditions":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte rtnu-page__content']")).getText();
-                System.out.println(content);
-                break;
+                case "https://hydralyte.com/pages/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elm text-edit']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.insception.com/insception-pricing/refund-policy/":
-            	
-            	content = driver.findElement(By.xpath("//section[@class='post_content clearfix']")).getText();
-                System.out.println(content);
-                break;
+                case "https://hydralyte.com/pages/terms-conditions":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte rtnu-page__content']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://cellsforlife.com/privacy-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='et_pb_text_inner']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.insception.com/insception-pricing/refund-policy/":
+                	
+                	content = driver.findElement(By.xpath("//section[@class='post_content clearfix']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.royale.ca/diapers/privacy-policy/":     //220
-            	
-            	content = driver.findElement(By.xpath("//h1[@class='css-1w7ejuy e13xswbp1']")).getText();
-                System.out.println(content);
-                break;
+                case "https://cellsforlife.com/privacy-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='et_pb_text_inner']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.royale.ca/diapers/terms-of-service/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.royale.ca/diapers/privacy-policy/":     //220
+                	
+                	content = driver.findElement(By.xpath("//h1[@class='css-1w7ejuy e13xswbp1']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://flektoys.com/en/en/pages/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.royale.ca/diapers/terms-of-service/":
+                	
+                	content = driver.findElement(By.xpath("//h1[@class='css-1w7ejuy e13xswbp1']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://flektoys.com/en/en/pages/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://flektoys.com/en/en/pages/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//h1[@class='title']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://lotusbabyco.com/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://flektoys.com/en/en/pages/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//h1[@class='title']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://lotusbabyco.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://lotusbabyco.com/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.lumehra.com/#":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://lotusbabyco.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://makemybellyfit.com/pages/return-policy-politique-de-retour":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.lumehra.com/#":
+                	
+                	content = driver.findElement(By.xpath("//div[@id='content']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://makemybellyfit.com/pages/terms-conditions-termes-conditions":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://makemybellyfit.com/pages/return-policy-politique-de-retour":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte rte--nomargin']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://makemybellyfit.com/pages/privacy-policy-politique-de-confidentialite":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://makemybellyfit.com/pages/terms-conditions-termes-conditions":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte rte--nomargin']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.ontario.ca/page/terms-use":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://makemybellyfit.com/pages/privacy-policy-politique-de-confidentialite":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte rte--nomargin']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.munchkin.com/terms-conditions":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.ontario.ca/page/terms-use":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='row intro row--collapse']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://www.munchkin.com/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.munchkin.com/terms-conditions":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='w-full xl:max-w-[1293px] lg:max-w-[1025px] m-auto']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://orangenaturals.com/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://www.munchkin.com/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='w-full lg:max-w-[1025px] m-auto']")).getText();
+                    System.out.println(content);
+                    break;
 
-            case "https://orangenaturals.com/shipping-returns-exchanges":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://orangenaturals.com/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elementor-widget-container']")).getText();
+                    System.out.println(content);
+                    break;
+
+                case "https://orangenaturals.com/shipping-returns-exchanges":   //304
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elementor-widget-container']")).getText();
+                    System.out.println(content);
+                    break;
+                        
+                case "https://orangenaturals.com/privacy-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elementor-widget-container']")).getText();
+                    System.out.println(content);
+                    break;
                     
-            case "https://orangenaturals.com/privacy-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
+                case "https://mypaume.com/pages/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='page-width page-width--narrow']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://mypaume.com/pages/paume-in-terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='page-width page-width--narrow']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://www.pegperego.com/en_ca/baby/privacy-policy-cookie-restriction-mode/":
+                	
+                	content = driver.findElement(By.xpath("//div[@data-content-type='html']")).getText();
+                    System.out.println(content);
+                    break;
                 
-            case "https://mypaume.com/pages/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://mypaume.com/pages/paume-in-terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://www.pegperego.com/en_ca/baby/privacy-policy-cookie-restriction-mode/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-            
-            case "https://seaford.ca/privacy-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://prenabelt.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://talkinsleep.com/terms-and-conditions-of-use/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://talkinsleep.com/privacy-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://trippinalongboutique.com/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://trippinalongboutique.com/policies/refund-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://trippinalongboutique.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://uppababy.com/ordering-info-and-returns-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://uppababy.com/privacy-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://uppababy.com/terms-of-service/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://uppababy.com/cookie-policy/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://www.kenvue.com/privacy-policy/canada/en":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://clekinc.com/our-policies/policy-on-privacy-of-customer-personal-information/":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://clekinc.ca/policies/refund-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://clekinc.ca/pages/chemical-sustainability-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://clekinc.ca/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://clekinc.ca/policies/shipping-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://clekinc.ca/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://caley-beth.com/policies/privacy-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://caley-beth.com/policies/shipping-policy":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            case "https://caley-beth.com/policies/terms-of-service":
-            	
-            	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
-                System.out.println(content);
-                break;
-                
-            default:
+                case "https://seaford.ca/privacy-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elementor-widget-container']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://prenabelt.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://talkinsleep.com/terms-and-conditions-of-use/":         //346
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elementor-widget-container']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://talkinsleep.com/privacy-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='elementor-widget-container']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://trippinalongboutique.com/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://trippinalongboutique.com/policies/refund-policy":      //364
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://trippinalongboutique.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://uppababy.com/ordering-info-and-returns-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='wysiwyg__content']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://uppababy.com/privacy-policy/":     //382
+                	
+                	content = driver.findElement(By.xpath("//div[@class='wysiwyg__content']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://uppababy.com/terms-of-service/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='wysiwyg__content']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://uppababy.com/cookie-policy/":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='wysiwyg__content']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://www.kenvue.com/privacy-policy/canada/en":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='RichTextModule-items RichTextBody']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://clekinc.com/our-policies/policy-on-privacy-of-customer-personal-information/":  //406
+                	
+                	content = driver.findElement(By.xpath("//div[@class='container container--reading-width']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://clekinc.ca/policies/refund-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://clekinc.ca/pages/chemical-sustainability-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='rte cf']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://clekinc.ca/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://clekinc.ca/policies/shipping-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://clekinc.ca/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://caley-beth.com/policies/privacy-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://caley-beth.com/policies/shipping-policy":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                case "https://caley-beth.com/policies/terms-of-service":
+                	
+                	content = driver.findElement(By.xpath("//div[@class='shopify-policy__body']")).getText();
+                    System.out.println(content);
+                    break;
+                    
+                default:
+                	
                 System.out.println("No specific actions for this URL: " + url);
                 break;
             }
             
+       /*   Row row = sheet.createRow(rowIndex++);
+            Cell urlCell = row.createCell(0);
+            urlCell.setCellValue(url);                  */
+            
             Row row = sheet.createRow(rowIndex++);
             Cell urlCell = row.createCell(0);
             urlCell.setCellValue(url);
+            
+            Cell contentCell = row.createCell(1);
+            if (content.length() > EXCEL_CELL_CHARACTER_LIMIT) {
+            	
+                content = content.substring(0, EXCEL_CELL_CHARACTER_LIMIT - 1); // Trim content to cell limit
+            }
+            
+            contentCell.setCellValue(content);
+            contentCell.setCellStyle(contentStyle);  // Apply the wrap text style
 
-            writeLargeTextToCell(sheet, rowIndex - 1, 1, content);
+            
+      //    writeLargeTextToCell(sheet, rowIndex - 1, 1, content);
 
             System.out.println("Extracted content from URL: " + url);
         }
@@ -507,7 +532,7 @@ public class ExtractData_Termscondition {
         return urls;
     }
 
-    private static void writeLargeTextToCell(Sheet sheet, int rowIndex, int columnIndex, String text) {
+ /*   private static void writeLargeTextToCell(Sheet sheet, int rowIndex, int columnIndex, String text) {
     	
         String[] lines = text.split("\n");
         for (String line : lines) {
@@ -520,5 +545,5 @@ public class ExtractData_Termscondition {
             cell.setCellValue(line);
             rowIndex++;
           }
-      }
+      }                */
   }
